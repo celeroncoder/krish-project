@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model index_values {
+  pH        Float
+  TDS       Float
+  dt_n_time DateTime @default(dbgenerated("(now() AT TIME ZONE 'ist'::text)")) @db.Timestamptz(6)
+  srl_nmr   BigInt   @id @default(autoincrement())
+}
